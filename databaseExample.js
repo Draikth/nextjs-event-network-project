@@ -3,4 +3,4 @@ import postgres from 'postgres';
 
 config();
 
-const sql = postgres();
+export const sql = postgres();

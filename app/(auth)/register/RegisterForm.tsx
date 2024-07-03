@@ -14,6 +14,7 @@ export default function RegisterForm() {
       method: 'POST',
       body: JSON.stringify({
         username,
+        email,
         password,
       }),
 

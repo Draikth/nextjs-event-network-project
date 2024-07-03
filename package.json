@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@upleveled/ley": "^0.8.6",
+    "bcrypt": "^5.1.1",
     "dotenv-safe": "^9.1.0",
     "next": "15.0.0-canary.44",
     "postgres": "^3.4.4",
@@ -19,10 +20,12 @@
     "react-dom": "19.0.0-rc.0",
     "sass": "^1.77.6",
     "server-only": "^0.0.1",
-    "tsx": "^4.15.7"
+    "tsx": "^4.15.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@ts-safeql/eslint-plugin": "^3.3.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/dotenv-safe": "^8.1.6",
     "@types/node": "^20",
     "@types/react": "^18",

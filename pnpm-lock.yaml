@@ -11,6 +11,9 @@ importers:
       '@upleveled/ley':
         specifier: ^0.8.6
         version: 0.8.6
+      bcrypt:
+        specifier: ^5.1.1
+        version: 5.1.1(encoding@0.1.13)
       dotenv-safe:
         specifier: ^9.1.0
         version: 9.1.0(dotenv@16.4.5)
@@ -35,10 +38,16 @@ importers:
       tsx:
         specifier: ^4.15.7
         version: 4.15.7
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@ts-safeql/eslint-plugin':
         specifier: ^3.3.1
         version: 3.3.1(eslint@9.5.0)(libpg-query@16.2.0(encoding@0.1.13))(typescript@5.5.2)
+      '@types/bcrypt':
+        specifier: ^5.0.2
+        version: 5.0.2
       '@types/dotenv-safe':
         specifier: ^8.1.6
         version: 8.1.6
@@ -622,6 +631,9 @@ packages:
     peerDependencies:
       libpg-query: '>=13.2.5'
 
+  '@types/bcrypt@5.0.2':
+    resolution: {integrity: sha512-6atioO8Y75fNcbmj0G7UjI9lXN2pQ/IGJ2FWT4a/btd0Lk9lQalHLKhkgKVZ3r+spnmWUKfbMi1GEe9wyHQfNQ==}
+
   '@types/dotenv-safe@8.1.6':
     resolution: {integrity: sha512-ftZXu3WGT6ALq+f98IX2gWriGMPds+0ku5h8kZewNpY47ua+Z+XNcin9apZ2kVd4B9LV1vMfUOyDf1/hhreR0Q==}
 
@@ -906,6 +918,10 @@ packages:
 
   balanced-match@2.0.0:
     resolution: {integrity: sha512-1ugUSr8BHXRnK23KfuYS+gVMC3LB8QGH9W1iGtDPsNWoQbgtXSExkBu2aDR4epiGWZOjZsj6lDl/N/AqqTC3UA==}
+
+  bcrypt@5.1.1:
+    resolution: {integrity: sha512-AGBHOG5hPYZ5Xl9KXzU5iKq9516yEmvCKDg3ecP5kX2aB6UqTeXZxk2ELnDgDm6BQSMlLt9rDB4LoSMx0rYwww==}
+    engines: {node: '>= 10.0.0'}
 
   big-integer@1.6.52:
     resolution: {integrity: sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==}
@@ -2077,6 +2093,9 @@ packages:
         optional: true
       sass:
         optional: true
+
+  node-addon-api@5.1.0:
+    resolution: {integrity: sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==}
 
   node-addon-api@7.1.0:
     resolution: {integrity: sha512-mNcltoe1R8o7STTegSOHdnJNN7s5EUvhoS7ShnTHDyOSd+8H+UdWODq6qSv67PjC8Zc5JRT8+oLAMCr0SIXw7g==}
@@ -3412,6 +3431,10 @@ snapshots:
       - supports-color
       - typescript
 
+  '@types/bcrypt@5.0.2':
+    dependencies:
+      '@types/node': 20.14.9
+
   '@types/dotenv-safe@8.1.6':
     dependencies:
       '@types/node': 20.14.9
@@ -3778,6 +3801,14 @@ snapshots:
   balanced-match@1.0.2: {}
 
   balanced-match@2.0.0: {}
+
+  bcrypt@5.1.1(encoding@0.1.13):
+    dependencies:
+      '@mapbox/node-pre-gyp': 1.0.11(encoding@0.1.13)
+      node-addon-api: 5.1.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
 
   big-integer@1.6.52: {}
 
@@ -5153,6 +5184,8 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+
+  node-addon-api@5.1.0: {}
 
   node-addon-api@7.1.0: {}
 
