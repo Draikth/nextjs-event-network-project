@@ -7,7 +7,7 @@ import {
   User,
 } from '../../../../database/users';
 
-type RegisterResponseBodyPost =
+export type RegisterResponseBodyPost =
   | {
       user: User;
     }
@@ -70,7 +70,7 @@ export async function POST(
     return NextResponse.json(
       { errors: [{ message: 'Registration failed' }] },
       {
-        status: 400,
+        status: 500,
       },
     );
   }

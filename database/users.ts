@@ -38,10 +38,12 @@ export const createUserInsecure = cache(
         (
           ${username},
           ${email},
-          ${passwordHash},
+          ${passwordHash}
         )
       RETURNING
-        users.id users.username users.email
+        users.id,
+        users.username,
+        users.email
     `;
     return user;
   },
