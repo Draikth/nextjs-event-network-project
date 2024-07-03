@@ -2,15 +2,15 @@ import { Sql } from 'postgres';
 
 export async function up(sql: Sql) {
   await sql`
-    CREATE TABLE users (
+    CREATE TABLE comments (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      username varchar(80) NOT NULL UNIQUE,
-      email varchar(80) NOT NULL UNIQUE,
-      password_hash varchar(150) NOT NULL
+      event_id integer NOT NULL,
+      user_id integer NOT NULL,
+      comment_text text NOT NULL
     );
   `;
 }
 
 export async function down(sql: Sql) {
-  await sql`DROP TABLE users`;
+  await sql`DROP TABLE comments`;
 }

@@ -2,15 +2,14 @@ import { Sql } from 'postgres';
 
 export async function up(sql: Sql) {
   await sql`
-    CREATE TABLE users (
+    CREATE TABLE event_categories (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      username varchar(80) NOT NULL UNIQUE,
-      email varchar(80) NOT NULL UNIQUE,
-      password_hash varchar(150) NOT NULL
+      event_id integer NOT NULL,
+      category_id integer NOT NULL
     );
   `;
 }
 
 export async function down(sql: Sql) {
-  await sql`DROP TABLE users`;
+  await sql`DROP TABLE event_categories`;
 }
