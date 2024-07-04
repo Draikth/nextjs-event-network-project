@@ -4,8 +4,8 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE comments (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      event_id integer NOT NULL,
-      user_id integer NOT NULL,
+      event_id integer NOT NULL REFERENCES events (id) ON DELETE cascade,
+      user_id integer NOT NULL REFERENCES users (id) ON DELETE cascade,
       comment_text text NOT NULL
     );
   `;

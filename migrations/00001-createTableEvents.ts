@@ -4,10 +4,10 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE events (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      user_id integer NOT NULL,
+      user_id integer NOT NULL REFERENCES users (id) ON DELETE cascade,
       name varchar(80) NOT NULL,
       type varchar(150) NOT NULL,
-      date timestamp(0) WITHOUT TIME ZONE NOT NULL,
+      date timestamp NOT NULL,
       location varchar(255) NOT NULL,
       duration integer NULL,
       entry_fee integer NULL,
