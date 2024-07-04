@@ -8,7 +8,7 @@ import { userSchema } from '../../../../migrations/00000-createTableUsers';
 
 export type LoginResponseBodyPost =
   | {
-      user: Pick<User, 'email'>;
+      user: Pick<User, 'username'>;
     }
   | {
       errors: { message: string }[];
@@ -70,5 +70,5 @@ export async function POST(
   // 7. send the new cookie in the headers
 
   // 8. Return the new user information without the password hash
-  return NextResponse.json({ user: { email: userWithPasswordHash.email } });
+  return NextResponse.json({ user: { username: userWithPasswordHash.username } });
 }
