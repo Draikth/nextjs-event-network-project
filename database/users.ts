@@ -20,7 +20,7 @@ export const getUserInsecure = cache(async (username: string) => {
     FROM
       users
     WHERE
-      username = ${username}
+      username = ${username.toLowerCase()}
   `;
   return user;
 });
@@ -36,7 +36,7 @@ export const createUserInsecure = cache(
         )
       VALUES
         (
-          ${username},
+          ${username.toLowerCase()},
           ${email},
           ${passwordHash}
         )
@@ -48,3 +48,15 @@ export const createUserInsecure = cache(
     return user;
   },
 );
+
+export const getUserWithPasswordHashInsecure = cache(async (email: string) => {
+  const [user] = await sql<UserWithPasswordHash[]>`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      email = ${email}
+  `;
+  return user;
+});

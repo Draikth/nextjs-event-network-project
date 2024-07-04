@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
 import {
   createUserInsecure,
   getUserInsecure,
   User,
 } from '../../../../database/users';
+import { userSchema } from '../../../../migrations/00000-createTableUsers';
 
 export type RegisterResponseBodyPost =
   | {
@@ -14,12 +14,6 @@ export type RegisterResponseBodyPost =
   | {
       errors: { message: string }[];
     };
-
-const userSchema = z.object({
-  username: z.string().min(3),
-  email: z.string().min(3),
-  password: z.string().min(3),
-});
 
 export async function POST(
   request: NextRequest,
