@@ -9,7 +9,7 @@ import { LoginResponseBodyPost } from '../api/login/route';
 type Props = { returnTo?: string | string[] };
 
 export default function LoginForm(props: Props) {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
 
@@ -21,7 +21,7 @@ export default function LoginForm(props: Props) {
     const response = await fetch('api/login', {
       method: 'POST',
       body: JSON.stringify({
-        username,
+        email,
         password,
       }),
 
@@ -45,10 +45,10 @@ export default function LoginForm(props: Props) {
   return (
     <form onSubmit={async (event) => await handleLogin(event)}>
       <label>
-        Username
+        Email
         <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
+          value={email}
+          onChange={(event) => setEmail(event.currentTarget.value)}
         />
       </label>
       <label>
