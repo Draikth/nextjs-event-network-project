@@ -30,7 +30,6 @@ export async function POST(
 
   // 1. Get the user data from the request
   const body = await request.json();
-  console.log('Request body: ', body);
 
   // 2. Validate the user data with Zod
   const result = loginSchema.safeParse(body);
@@ -76,8 +75,6 @@ export async function POST(
 
   // 5. Create a token
   const token = crypto.randomBytes(100).toString('base64');
-
-  console.log('token: ', token);
 
   // 6. Create the session record
   const session = await createSessionInsecure(token, userWithPasswordHash.id);
