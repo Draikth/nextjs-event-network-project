@@ -1,11 +1,14 @@
 import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createSessionInsecure } from '../../../../database/sessions';
 import {
   getUserWithPasswordHashInsecure,
   User,
 } from '../../../../database/users';
+import { secureCookieOptions } from '../../../../util/cookies';
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -77,7 +80,33 @@ export async function POST(
   console.log('token: ', token);
 
   // 6. Create the session record
+  const session = await createSessionInsecure(token, userWithPasswordHash.id);
+
+  if (!session) {
+    return NextResponse.json(
+      { errors: [{ message: 'Session creation failed' }] },
+      {
+        status: 401,
+      },
+    );
+  }
+
   // 7. send the new cookie in the headers
+  // cookies().set({
+  //   name: 'sessionToken',
+  //   value: session.token,
+  //   httpOnly: true,
+  //   path: '/',
+  //   secure: process.env.NODE_ENV === 'production',
+  //   maxAge: 60 * 60 * 24,
+  //   sameSite: 'lax',
+  // });
+
+  cookies().set({
+    name: 'sessionToken',
+    value: session.token,
+    ...secureCookieOptions,
+  });
 
   // 8. Return the new user information without the password hash
   return NextResponse.json({

@@ -1,11 +1,15 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { createSessionInsecure } from '../../../../database/sessions';
 import {
   createUserInsecure,
   getUserInsecure,
   User,
 } from '../../../../database/users';
 import { userSchema } from '../../../../migrations/00000-createTableUsers';
+import { secureCookieOptions } from '../../../../util/cookies';
 
 export type RegisterResponseBodyPost =
   | {
@@ -68,6 +72,40 @@ export async function POST(
       },
     );
   }
+
+  // 5. Create a token
+  const token = crypto.randomBytes(100).toString('base64');
+
+  console.log('token: ', token);
+
+  // 6. Create the session record
+  const session = await createSessionInsecure(token, newUser.id);
+
+  if (!session) {
+    return NextResponse.json(
+      { errors: [{ message: 'Session creation failed' }] },
+      {
+        status: 401,
+      },
+    );
+  }
+
+  // 7. send the new cookie in the headers
+  // cookies().set({
+  //   name: 'sessionToken',
+  //   value: session.token,
+  //   httpOnly: true,
+  //   path: '/',
+  //   secure: process.env.NODE_ENV === 'production',
+  //   maxAge: 60 * 60 * 24,
+  //   sameSite: 'lax',
+  // });
+
+  cookies().set({
+    name: 'sessionToken',
+    value: session.token,
+    ...secureCookieOptions,
+  });
 
   return NextResponse.json({ user: newUser });
 }
