@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { Session } from '../migrations/00005-createTableSessions';
+import { Session } from '../migrations/00006-createTableSessions';
 import { sql } from './connect';
 
 export const getValidSession = cache(async (sessionToken: string) => {
