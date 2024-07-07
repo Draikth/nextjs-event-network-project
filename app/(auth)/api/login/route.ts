@@ -2,18 +2,20 @@ import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
 import { createSessionInsecure } from '../../../../database/sessions';
 import {
   getUserWithPasswordHashInsecure,
   User,
 } from '../../../../database/users';
+import { loginSchema } from '../../../../migrations/00000-createTableUsers';
 import { secureCookieOptions } from '../../../../util/cookies';
 
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3),
-});
+// const loginSchema = z.object({
+//   email: z.string().email(),
+//   password: z.string().min(3),
+// });
+
+const login = loginSchema;
 
 export type LoginResponseBodyPost =
   | {
@@ -32,7 +34,7 @@ export async function POST(
   const body = await request.json();
 
   // 2. Validate the user data with Zod
-  const result = loginSchema.safeParse(body);
+  const result = login.safeParse(body);
 
   if (!result.success) {
     return NextResponse.json(
