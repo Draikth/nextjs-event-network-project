@@ -1,7 +1,6 @@
-import { config } from 'dotenv-safe';
-import { postgresConfig } from './util/config.js';
+import { postgresConfig, setEnvironmentVariables } from './util/config.js';
 
-config();
+setEnvironmentVariables();
 
 // const options = {
 //   transform: {

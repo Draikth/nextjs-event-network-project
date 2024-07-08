@@ -2,6 +2,9 @@ import 'server-only';
 import { unstable_noStore as noStore } from 'next/cache';
 import postgres, { Sql } from 'postgres';
 import postgresConfig from '../ley.config';
+import { setEnvironmentVariables } from '../util/config';
+
+setEnvironmentVariables();
 
 declare module globalThis {
   let postgresSqlClient: Sql;

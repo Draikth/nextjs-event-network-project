@@ -5,7 +5,7 @@ const users = [
     id: 1,
     username: 'man',
     email: 'man@man.com',
-    password: 'manna',
+    // pw: 'manna',
     password_hash:
       '$2a$12$cV2HA84ZMALtxXia2t8ulO.9mV7W.GitRrRHgL10ajT521KKkr4.y',
   },
@@ -13,7 +13,7 @@ const users = [
     id: 2,
     username: 'fish',
     email: 'fish@water.com',
-    password: 'fishing',
+    // pw: 'fishing',
     password_hash:
       '$2a$12$KYFy6GWsy7D7CgcAWk3hnOXaXFCgkVG6zjkz2P9H70HtBCX1Dit2u',
   },
@@ -21,7 +21,7 @@ const users = [
     id: 3,
     username: 'eventor',
     email: 'eventor@events.com',
-    password: 'eventing',
+    // pw: 'eventing',
     password_hash:
       '$2a$12$PYUUFgXcRdaOPoAKzJSylunLXp9C565yzPo.UzDct3JO9X1vhNJU.',
   },
@@ -29,7 +29,7 @@ const users = [
     id: 4,
     username: 'festifan',
     email: 'fest@festi.com',
-    password: 'fest4life',
+    // pw: 'fest4life',
     password_hash:
       '$2a$12$8flhz0XZBsuCyfFbVztcKufVkxR5kyUBsWGwU2oWkmf0RM0mbs.n6',
   },
@@ -37,7 +37,7 @@ const users = [
     id: 5,
     username: 'ev-party',
     email: 'ev@party.com',
-    password: 'partygo',
+    // pw: 'partygo',
     password_hash:
       '$2a$12$PPkRD1YQHIf2duEHej4POu3BqVVCP1LoXYF1G1Ioa0PiMmSnDSfaW',
   },
