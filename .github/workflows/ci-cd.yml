@@ -1,0 +1,87 @@
+name: CI
+on: push
+
+jobs:
+  ci:
+    name: Jest Unit Tests, Type Checking, Linting, Playwright End to End Tests
+    runs-on: ubuntu-latest # or macos-latest, windows-latest
+    timeout-minutes: 30
+    # TODO: Update environment variables with your own database credentials
+    env:
+      PGHOST: localhost
+      PGDATABASE: next_js_example_spring_2024
+      PGUSERNAME: next_js_example_spring_2024
+      PGPASSWORD: next_js_example_spring_2024
+    steps:
+      - name: Start preinstalled PostgreSQL on Ubuntu
+        run: |
+          sudo systemctl start postgresql.service
+          pg_isready
+      - name: Create database user
+        run: |
+          sudo -u postgres psql --command="CREATE USER $PGUSERNAME PASSWORD '$PGPASSWORD'" --command="\du"
+      - name: Create database and allow user
+        run: |
+          sudo -u postgres createdb --owner=$PGUSERNAME $PGDATABASE
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+
+      # Use the official setup-node action (sets up Node.js):
+      # https://github.com/actions/setup-node
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+      - name: Jest unit tests
+        run: pnpm jest
+      - name: Run database migrations
+        run: pnpm migrate up
+      - name: Build Next.js app (types needed for TSC and ESLint)
+        run: pnpm build
+      - name: Check TypeScript Types
+        run: pnpm tsc
+      - name: Lint with ESLint
+        run: pnpm eslint . --max-warnings 0
+      - name: Lint with Stylelint
+        run: pnpm stylelint '**/*.{css,scss,less,js,tsx}'
+
+      # Cache and install Playwright browser binaries, modified version of:
+      # https://github.com/microsoft/playwright/issues/7249#issuecomment-1154603556
+      # https://github.com/microsoft/playwright/issues/7249#issuecomment-1385567519
+      # https://playwrightsolutions.com/playwright-github-action-to-cache-the-browser-binaries/
+      - name: Get installed Playwright version for cache key
+        run: echo "PLAYWRIGHT_VERSION=$(yq eval '.version' --output-format=yaml ./node_modules/@playwright/test/package.json)" >> $GITHUB_ENV
+      - name: Cache Playwright browser binaries
+        uses: actions/cache@v4
+        id: playwright-browser-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Install Playwright browsers only on cache miss
+        run: pnpm playwright install --with-deps chromium
+        if: steps.playwright-browser-cache.outputs.cache-hit != 'true'
+
+      - name: Run tests
+        run: pnpm playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-screenshots-videos
+          path: playwright/test-results/
+  cd:
+    name: Deploy to Fly.io
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
