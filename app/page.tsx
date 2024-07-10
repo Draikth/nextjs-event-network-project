@@ -1,12 +1,14 @@
-import styles from './page.module.css';
+import styles from './page.module.scss';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <div>home page coming soon</div>
+    <div className={styles.homePage}>
+      <main>
+        <hgroup>
+          <h1>Welcome to the Event Network Project!</h1>
+          <p>A place to find what might be happening around the city!</p>
+        </hgroup>
       </main>
-      <footer className={styles.footer}>maybe some footer stuff</footer>
     </div>
   );
 }
