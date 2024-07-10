@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { getSafeReturnToPath } from '../../../util/validation';
@@ -62,6 +63,13 @@ export default function LoginForm(props: Props) {
         />
       </label>
       <button>Login</button>
+      <br />
+      <div>
+        If you haven't yet, please{' '}
+        <span>
+          <Link href="/register">Register here</Link>
+        </span>
+      </div>
 
       {errors.map((error) => (
         <div className="error" key={`error-${error.message}`}>

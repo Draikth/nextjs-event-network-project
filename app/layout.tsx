@@ -43,6 +43,7 @@ export default async function RootLayout({ children }: Props) {
             <div>
               <Link href="/">Home</Link>
               <Link href="/events">Upcoming Events</Link>
+              <Link href="/post">Post Events</Link>
               <div>
                 {user ? (
                   <>
