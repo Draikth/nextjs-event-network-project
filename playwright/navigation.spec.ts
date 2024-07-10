@@ -8,4 +8,9 @@ test('navigation test', async ({ page }) => {
       name: 'Welcome to the Event Network Project!',
     }),
   ).toBeVisible();
+
+  // header with page locator
+  await expect(
+    page.locator('h1:text("Welcome to the Event Network Project!")'),
+  ).toBeVisible();
 });
