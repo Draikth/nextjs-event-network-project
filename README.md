@@ -7,7 +7,7 @@ The site is supposed to act as a collective reference point for all these variou
 ## Technologies
 
 - Next.js
-- Postgres.js
+- PostgreSQL
 - Jest
 - Playwright
 

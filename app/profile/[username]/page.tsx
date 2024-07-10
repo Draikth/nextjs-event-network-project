@@ -8,7 +8,7 @@ type Props = {
   };
 };
 
-export default async function UserProfile(props: Props) {
+export default async function UserProfilePage(props: Props) {
   // 1. Check if the sessionToken cookie exists
   const sessionCookie = cookies().get('sessionToken');
 
