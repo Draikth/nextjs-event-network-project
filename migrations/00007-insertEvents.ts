@@ -188,7 +188,9 @@ export async function up(sql: Sql) {
           ${event.user_id},
           ${event.name},
           ${event.type},
-          ${event.date},
+          date (
+            ${event.date}
+          ),
           ${event.location},
           ${event.duration},
           ${event.entry_fee},
