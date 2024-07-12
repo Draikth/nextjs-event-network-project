@@ -38,14 +38,17 @@ export default async function EventPage(props: Props) {
         <br />
         {singleEvent.type}
         <br />
+        {singleEvent.category}
+        <br />
         {singleEvent.date.toLocaleDateString()}
-
         <br />
         {formatDuration(singleEvent.duration)}
         <br />
         {singleEvent.location}
         <br />
-        {singleEvent.category}
+        {singleEvent.description}
+        <br />
+        {singleEvent.organizerUrl}
         <br />
       </div>
     </div>
