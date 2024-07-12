@@ -6,25 +6,16 @@ export const metadata = {
   description: 'Upcoming events around the city',
 };
 
-function formatDuration(duration: number | null): string {
-  if (duration === null) {
-    return 'N/A';
-  }
-  const hours = Math.floor(duration / 60);
-  const minutes = duration % 60;
-  return `${hours}h ${minutes}m`;
-}
-
 export default async function EventsPage() {
   const events = await getEventsInsecure();
   return (
     <div>
-      <h1>These Are Our Currently Available Products</h1>
+      <h1>These Are Our Currently Listed Upcoming Events</h1>
       <div>
         <br />
-        {events.map((event) => {
-          return (
-            <div key={`events-${event.id}`}>
+        {events.map((event) => (
+          <div key={`events-${event.id}`}>
+            <Link href={`/events/${event.id}`}>
               <div>
                 {event.name}
                 <br />
@@ -34,20 +25,18 @@ export default async function EventsPage() {
                 <br />
                 {event.location}
                 <br />
-                {formatDuration(event.duration)}
-                <br />
-                {event.image}
+                <img src={event.image} alt={event.name} />
+                {/* temporary for now */}
                 <br />
                 {event.category}
                 <br />
-
                 <br />
               </div>
               <br />
               <br />
-            </div>
-          );
-        })}
+            </Link>
+          </div>
+        ))}
         <br />
       </div>
       <br />
