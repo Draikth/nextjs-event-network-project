@@ -88,15 +88,6 @@ export async function POST(
   }
 
   // 7. send the new cookie in the headers
-  // cookies().set({
-  //   name: 'sessionToken',
-  //   value: session.token,
-  //   httpOnly: true,
-  //   path: '/',
-  //   secure: process.env.NODE_ENV === 'production',
-  //   maxAge: 60 * 60 * 24,
-  //   sameSite: 'lax',
-  // });
 
   cookies().set({
     name: 'sessionToken',
