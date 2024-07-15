@@ -31,7 +31,7 @@ const events = [
       'Annual tech conference covering the latest trends in technology.',
     image: 'http://example.com/images/vienna_tech_conference.jpg',
     organizer_url: 'http://example.com/organizers/vienna_tech_conference',
-    age_restriction: null,
+    age_restriction: false,
     archived: false,
   },
   {
@@ -47,7 +47,7 @@ const events = [
     description: 'Exhibition of contemporary art by local artists.',
     image: 'http://example.com/images/vienna_art_exhibition.jpg',
     organizer_url: 'http://example.com/organizers/vienna_art_exhibition',
-    age_restriction: null,
+    age_restriction: false,
     archived: false,
   },
   {
@@ -79,7 +79,7 @@ const events = [
     description: 'Festival showcasing diverse culinary delights.',
     image: 'http://example.com/images/vienna_food_festival.jpg',
     organizer_url: 'http://example.com/organizers/vienna_food_festival',
-    age_restriction: null,
+    age_restriction: false,
     archived: false,
   },
   {

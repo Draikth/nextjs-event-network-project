@@ -1,22 +1,5 @@
 import { Sql } from 'postgres';
 
-export type Event = {
-  id: number;
-  userId: number;
-  name: string;
-  type: string;
-  date: Date;
-  location: string;
-  duration: null | number;
-  entryFee: null | number;
-  category: string;
-  description: string;
-  image: string;
-  organizerUrl: string;
-  ageRestriction: null | false | true;
-  archived: boolean;
-};
-
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE events (
@@ -32,7 +15,7 @@ export async function up(sql: Sql) {
       description text NOT NULL,
       image varchar(255) NOT NULL,
       organizer_url varchar(255) NOT NULL,
-      age_restriction boolean NULL,
+      age_restriction boolean NOT NULL DEFAULT FALSE,
       archived boolean NOT NULL
     );
   `;
