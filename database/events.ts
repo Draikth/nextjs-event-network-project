@@ -60,22 +60,21 @@ export const createEvent = cache(
           organizer_url,
           age_restriction,
           archived
-        )
-      VALUES
-        (
-          ${newEvent.userId},
-          ${newEvent.name},
-          ${newEvent.type},
-          ${newEvent.date},
-          ${newEvent.location},
-          ${newEvent.duration},
-          ${newEvent.entryFee},
-          ${newEvent.category},
-          ${newEvent.description},
-          ${newEvent.image},
-          ${newEvent.organizerUrl},
-          ${newEvent.ageRestriction},
-          ${newEvent.archived}
+        ) (
+          SELECT
+            ${newEvent.userId},
+            ${newEvent.name},
+            ${newEvent.type},
+            ${newEvent.date},
+            ${newEvent.location},
+            ${newEvent.duration},
+            ${newEvent.entryFee},
+            ${newEvent.category},
+            ${newEvent.description},
+            ${newEvent.image},
+            ${newEvent.organizerUrl},
+            ${newEvent.ageRestriction},
+            ${newEvent.archived}
           FROM
             sessions
           WHERE
@@ -85,6 +84,7 @@ export const createEvent = cache(
       RETURNING
         events.*
     `;
+
     return event;
   },
 );
