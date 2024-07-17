@@ -6,14 +6,14 @@ import { setEnvironmentVariables } from '../util/config';
 
 setEnvironmentVariables();
 
-declare module globalThis {
-  let postgresSqlClient: Sql;
+declare global {
+  var postgresSqlClient: Sql | undefined;
 }
 
 // Connect only once to the database
 // https://github.com/vercel/next.js/issues/7811#issuecomment-715259370
 function connectOneTimeToDatabase() {
-  if (!('postgresSqlClient' in globalThis)) {
+  if (!globalThis.postgresSqlClient) {
     globalThis.postgresSqlClient = postgres(postgresConfig);
   }
 
@@ -34,8 +34,11 @@ function connectOneTimeToDatabase() {
     ...sqlParameters: Parameters<typeof globalThis.postgresSqlClient>
   ) => {
     noStore();
+    if (!globalThis.postgresSqlClient) {
+      throw new Error('Postgres client is not initialized');
+    }
     return globalThis.postgresSqlClient(...sqlParameters);
-  }) as typeof globalThis.postgresSqlClient;
+  }) as Sql;
 }
 
 export const sql = connectOneTimeToDatabase();
