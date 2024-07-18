@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getUser } from '../../../database/users';
+import DeleteProfileForm from './DeleteProfileForm'; // Import the client component
 
 type Props = {
   params: {
@@ -20,6 +21,11 @@ export default async function UserProfilePage(props: Props) {
     redirect('/login');
   }
 
-  // 4. If user exists, render the page
-  return <h1>{props.params.username}'s Profile</h1>;
+  // 4. If user exists, render the page and include the DeleteProfileForm component
+  return (
+    <>
+      <h1>{props.params.username}'s Profile</h1>
+      <DeleteProfileForm sessionToken={sessionCookie.value} />
+    </>
+  );
 }

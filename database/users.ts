@@ -26,6 +26,20 @@ export const getUser = cache(async (sessionToken: string) => {
   return user;
 });
 
+export const deleteUser = cache(async (sessionToken: string) => {
+  const [user] = await sql<UserWithPasswordHash[]>`
+    DELETE FROM users USING sessions
+    WHERE
+      sessions.token = ${sessionToken}
+      AND sessions.expiry_timestamp > now()
+      AND users.id = sessions.user_id
+    RETURNING
+      users.*
+  `;
+
+  return user;
+});
+
 export const getUserInsecure = cache(async (username: string) => {
   const [user] = await sql<User[]>`
     SELECT
