@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getEventInsecure } from '../../../database/events';
 
@@ -50,6 +51,10 @@ export default async function EventPage(props: Props) {
         <br />
         {singleEvent.organizerUrl}
         <br />
+      </div>
+      <div>
+        <br />
+        <Link href="/events">Back to Upcoming Events</Link>
       </div>
     </div>
   );

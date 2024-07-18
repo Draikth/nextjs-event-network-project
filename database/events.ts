@@ -62,7 +62,7 @@ export const createEvent = cache(
           archived
         ) (
           SELECT
-            ${newEvent.userId},
+            user_id,
             ${newEvent.name},
             ${newEvent.type},
             ${newEvent.date},
