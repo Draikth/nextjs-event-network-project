@@ -2,7 +2,8 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getComments } from '../../database/comments';
 import { getUser } from '../../database/users';
-import CommentsForm from './CommentsForm';
+
+// import CommentsForm from './CommentsForm';
 
 export default async function CommentsPage() {
   // Task: Restrict access to the notes page and only display notes belonging to the current logged in user
@@ -20,5 +21,7 @@ export default async function CommentsPage() {
   const comments = await getComments(sessionCookie.value);
   console.log(comments);
 
-  return <CommentsForm />;
+  return <h1>posted comments</h1>;
+
+  //   return <CommentsForm comments={comments} user={user} event={event} />;
 }

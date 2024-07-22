@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import { sql } from './connect';
 
-export type Event = {
+export type SiteEvent = {
   id: number;
   userId: number;
   name: string;
@@ -18,8 +18,40 @@ export type Event = {
   archived: boolean;
 };
 
+export const getEvents = cache(async (sessionToken: string) => {
+  const events = await sql<SiteEvent[]>`
+    SELECT
+      events.*
+    FROM
+      events
+      INNER JOIN sessions ON (
+        sessions.token = ${sessionToken}
+        AND sessions.user_id = events.user_id
+        AND expiry_timestamp > now()
+      )
+  `;
+  return events;
+});
+
+export const getEvent = cache(async (sessionToken: string, eventId: number) => {
+  const [event] = await sql<SiteEvent[]>`
+    SELECT
+      events.*
+    FROM
+      events
+      INNER JOIN sessions ON (
+        sessions.token = ${sessionToken}
+        AND sessions.user_id = events.user_id
+        AND expiry_timestamp > now()
+      )
+    WHERE
+      events.id = ${eventId}
+  `;
+  return event;
+});
+
 export const getEventsInsecure = cache(async () => {
-  const events = await sql<Event[]>`
+  const events = await sql<SiteEvent[]>`
     SELECT
       *
     FROM
@@ -30,7 +62,7 @@ export const getEventsInsecure = cache(async () => {
 });
 
 export const getEventInsecure = cache(async (id: number) => {
-  const [event] = await sql<Event[]>`
+  const [event] = await sql<SiteEvent[]>`
     SELECT
       *
     FROM
@@ -43,8 +75,8 @@ export const getEventInsecure = cache(async (id: number) => {
 });
 
 export const createEvent = cache(
-  async (sessionToken: string, newEvent: Omit<Event, 'id'>) => {
-    const [event] = await sql<Event[]>`
+  async (sessionToken: string, newEvent: Omit<SiteEvent, 'id'>) => {
+    const [event] = await sql<SiteEvent[]>`
       INSERT INTO
         events (
           user_id,

@@ -47,12 +47,16 @@ export default async function RootLayout({ children }: Props) {
               <div>
                 {user ? (
                   <>
-                    <Link href={`/profile/${user.username}`}>
-                      {user.username}
-                    </Link>
-                    <Link href="/post">Post Events</Link>
-                    <Link href="/comments"> Comments </Link>
-                    <LogoutButton />
+                    <div>
+                      <LogoutButton />
+                    </div>
+                    <div>
+                      <Link href={`/profile/${user.username}`}>
+                        {user.username}
+                      </Link>
+                      <Link href="/post">Post Events</Link>
+                      <Link href="/comments"> Comments </Link>
+                    </div>
                   </>
                 ) : (
                   <>
