@@ -18,5 +18,5 @@
 //   const [description, setDescription] = useState('');
 //   const [image, setImage] = useState('');
 //   const [organizerUrl, setOrganizerUrl] = useState('');
-//   const [ageRestriction, setAgeRestriction] = useState('');
+//   const [ageRestriction, setAgeRestriction] = useState(false);
 // }

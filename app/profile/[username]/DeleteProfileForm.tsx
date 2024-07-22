@@ -1,12 +1,17 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 type DeleteProfileFormProps = {
   sessionToken: string;
 };
 
-export default function DeleteProfileForm({ sessionToken }: DeleteProfileFormProps) {
+export default function DeleteProfileForm({
+  sessionToken,
+}: DeleteProfileFormProps) {
+  const router = useRouter();
+
   const handleDelete = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -19,7 +24,8 @@ export default function DeleteProfileForm({ sessionToken }: DeleteProfileFormPro
     });
 
     if (response.ok) {
-      window.location.href = '/login'; // Redirect to login page after deletion
+      router.push('/login'); // Redirect to login page after deletion
+      router.refresh();
     } else {
       console.error('Failed to delete user');
     }

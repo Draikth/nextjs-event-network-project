@@ -1,4 +1,9 @@
 import { Sql } from 'postgres';
+import { z } from 'zod';
+
+export const commentSchema = z.object({
+  commentText: z.string().min(1),
+});
 
 export async function up(sql: Sql) {
   await sql`

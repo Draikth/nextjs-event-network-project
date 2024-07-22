@@ -51,6 +51,7 @@ export default async function RootLayout({ children }: Props) {
                       {user.username}
                     </Link>
                     <Link href="/post">Post Events</Link>
+                    <Link href="/comments"> Comments </Link>
                     <LogoutButton />
                   </>
                 ) : (
