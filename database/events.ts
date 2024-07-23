@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { z } from 'zod';
 import { sql } from './connect';
 
 export type SiteEvent = {
@@ -17,6 +18,24 @@ export type SiteEvent = {
   ageRestriction: boolean;
   archived: boolean;
 };
+
+export const eventSchema = z.object({
+  name: z.string().min(1),
+  userId: z.number(),
+  type: z.string().min(3),
+  date: z.preprocess((arg) => {
+    if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+  }, z.date()),
+  location: z.string(),
+  duration: z.number(),
+  entryFee: z.number(),
+  category: z.string(),
+  description: z.string(),
+  organizerUrl: z.string(),
+  image: z.string(),
+  ageRestriction: z.boolean(),
+  archived: z.boolean(),
+});
 
 export const getEvents = cache(async (sessionToken: string) => {
   const events = await sql<SiteEvent[]>`

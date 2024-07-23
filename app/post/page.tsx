@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSession } from '../../database/sessions';
+import { getUser } from '../../database/users';
 import PostEventForm from './PostEventForm';
 
 export const metadata = {
@@ -21,5 +22,10 @@ export default async function PostEventsPage() {
     redirect(`/login?returnTo=/post`);
   }
 
-  return <PostEventForm />;
+  const profile = await getUser(session.token);
+  if (!profile) {
+    redirect('/login');
+  }
+
+  return <PostEventForm userId={profile.id} />;
 }

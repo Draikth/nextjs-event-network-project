@@ -3,9 +3,9 @@ import { Session } from '../migrations/00006-createTableSessions';
 import { sql } from './connect';
 
 export const getValidSession = cache(async (sessionToken: string) => {
-  const [session] = await sql<Pick<Session, 'id' | 'userId'>[]>`
+  const [session] = await sql<Omit<Session, 'id'>[]>`
     SELECT
-      sessions.id,
+      sessions.token,
       sessions.user_id
     FROM
       sessions
@@ -43,7 +43,7 @@ export const createSessionInsecure = cache(
 );
 
 export const deleteSession = cache(async (sessionToken: string) => {
-  const [session] = await sql<Pick<Session, 'id' | 'token'>[]>`
+  const [session] = await sql<Omit<Session, 'userId'>[]>`
     DELETE FROM sessions
     WHERE
       sessions.token = ${sessionToken}

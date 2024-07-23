@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
-import { createEvent, SiteEvent } from '../../../database/events';
-import { eventSchema } from '../../../migrations/00002-createTableEvents';
+import { NextResponse } from 'next/server';
+import { createEvent, eventSchema, SiteEvent } from '../../../database/events';
 
 export type PostEventsResponseBodyPost =
   | {
@@ -12,7 +11,7 @@ export type PostEventsResponseBodyPost =
     };
 
 export async function POST(
-  request: NextRequest,
+  request: Request,
 ): Promise<NextResponse<PostEventsResponseBodyPost>> {
   // Task: Create a note for the current logged in user
 
@@ -24,7 +23,10 @@ export async function POST(
 
   if (!result.success) {
     return NextResponse.json(
-      { error: 'Request does not contain event object' },
+      {
+        error: 'Request does not contain event object',
+        errorIssues: result.error.issues,
+      },
       {
         status: 400,
       },
@@ -35,7 +37,7 @@ export async function POST(
   const sessionTokenCookie = cookies().get('sessionToken');
 
   // 4. Create the Event
-  const newEvent =
+  const postEvent =
     sessionTokenCookie &&
     (await createEvent(sessionTokenCookie.value, {
       name: result.data.name,
@@ -54,7 +56,7 @@ export async function POST(
     }));
 
   // 5. If the note creation fails, return an error
-  if (!newEvent) {
+  if (!postEvent) {
     return NextResponse.json(
       { error: 'Note not created or access denied creating note' },
       {
@@ -64,5 +66,5 @@ export async function POST(
   }
 
   // 6. Return the content of the event
-  return NextResponse.json({ event: newEvent });
+  return NextResponse.json({ event: postEvent });
 }

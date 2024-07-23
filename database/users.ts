@@ -12,9 +12,11 @@ export type UserWithPasswordHash = User & {
 };
 
 export const getUser = cache(async (sessionToken: string) => {
-  const [user] = await sql<Pick<User, 'username'>[]>`
+  const [user] = await sql<User[]>`
     SELECT
-      users.username
+      users.username,
+      users.id,
+      users.email
     FROM
       users
       INNER JOIN sessions ON (

@@ -1,21 +1,21 @@
 import { Sql } from 'postgres';
 import { z } from 'zod';
 
-export const eventSchema = z.object({
-  name: z.string().min(1),
-  userId: z.number(),
-  type: z.string().min(3),
-  date: z.date(),
-  location: z.string(),
-  duration: z.number(),
-  entryFee: z.number(),
-  category: z.string(),
-  description: z.string(),
-  organizerUrl: z.string(),
-  image: z.string(),
-  ageRestriction: z.boolean(),
-  archived: z.boolean(),
-});
+// export const eventSchema = z.object({
+//   name: z.string().min(1),
+//   userId: z.number(),
+//   type: z.string().min(3),
+//   date: z.date(),
+//   location: z.string(),
+//   duration: z.number(),
+//   entryFee: z.number(),
+//   category: z.string(),
+//   description: z.string(),
+//   organizerUrl: z.string(),
+//   image: z.string(),
+//   ageRestriction: z.boolean(),
+//   archived: z.boolean(),
+// });
 
 export async function up(sql: Sql) {
   await sql`
