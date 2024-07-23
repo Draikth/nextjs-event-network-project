@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSession } from '../../database/sessions';
+import PostEventForm from './PostEventForm';
 
 export const metadata = {
   title: 'Post Events',
@@ -20,5 +21,5 @@ export default async function PostEventsPage() {
     redirect(`/login?returnTo=/post`);
   }
 
-  return <h1>Post Upcoming Events here: </h1>;
+  return <PostEventForm />;
 }
