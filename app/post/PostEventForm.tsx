@@ -229,7 +229,7 @@ export default function PostEventForm(props: Props) {
         <br />
         <br />
         <br />
-        <button type="submit">Post Event</button>
+        <button>Post Event</button>
       </form>
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </div>
