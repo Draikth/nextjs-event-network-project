@@ -15,7 +15,7 @@ export default function DeleteProfileForm({
   const handleDelete = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const response = await fetch('/api/user/delete', {
+    const response = await fetch('/api/postedEvents/deleteEvent', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -24,10 +24,9 @@ export default function DeleteProfileForm({
     });
 
     if (response.ok) {
-      router.push('/login'); // Redirect to login page after deletion
       router.refresh();
     } else {
-      console.error('Failed to delete user');
+      console.error('Failed to delete event');
     }
   };
 

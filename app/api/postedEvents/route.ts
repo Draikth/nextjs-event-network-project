@@ -13,12 +13,10 @@ export type PostEventsResponseBodyPost =
 export async function POST(
   request: Request,
 ): Promise<NextResponse<PostEventsResponseBodyPost>> {
-  // Task: Create a note for the current logged in user
-
-  // 1. Get the note data from the request
+  // 1. Get the event data from the request
   const body = await request.json();
 
-  // 2. Validate notes data with zod
+  // 2. Validate events data with zod
   const result = eventSchema.safeParse(body);
 
   if (!result.success) {
@@ -55,10 +53,10 @@ export async function POST(
       archived: result.data.archived,
     }));
 
-  // 5. If the note creation fails, return an error
+  // 5. If the event creation fails, return an error
   if (!postEvent) {
     return NextResponse.json(
-      { error: 'Note not created or access denied creating note' },
+      { error: 'Event not created or access denied creating event' },
       {
         status: 500,
       },
