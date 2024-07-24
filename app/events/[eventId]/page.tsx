@@ -51,7 +51,7 @@ export default async function EventPage(props: Props) {
         <br />
         {singleEvent.organizerUrl}
         <br />
-        {singleEvent.entryFee}
+        <p>€{singleEvent.entryFee}</p>
         <br />
       </div>
       <div>
