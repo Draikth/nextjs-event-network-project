@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getUser } from '../database/users';
 import LogoutButton from './(auth)/logout/LogoutButton';
+import styles from './layout.module.scss';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -39,24 +40,19 @@ export default async function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <header>
-          <nav>
-            <div>
+          <nav className={styles.nav}>
+            <div className={styles.navLinks}>
               <Link href="/">Home</Link>
               <Link href="/events">Upcoming Events</Link>
-
-              <div>
+              {user && <LogoutButton />}
+              <div className={styles.userLinks}>
                 {user ? (
                   <>
-                    <div>
-                      <LogoutButton />
-                    </div>
-                    <div>
-                      <Link href={`/profile/${user.username}`}>
-                        {user.username}
-                      </Link>
-                      <Link href="/post">Post Events</Link>
-                      <Link href="/comments"> Comments </Link>
-                    </div>
+                    <Link href={`/profile/${user.username}`}>
+                      {user.username}
+                    </Link>
+                    <Link href="/post">Post Events</Link>
+                    <Link href="/comments">Comments</Link>
                   </>
                 ) : (
                   <>

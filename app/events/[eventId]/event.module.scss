@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.eventCard {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 100%;
+  max-width: 600px;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+  }
+}
+
+.eventDetails {
+  padding: 1rem;
+}
+
+.eventName {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.eventType,
+.eventCategory,
+.eventDate,
+.eventDuration,
+.eventLocation,
+.eventDescription,
+.eventOrganizerUrl,
+.eventEntryFee {
+  margin-bottom: 0.5rem;
+}
+
+.backLink {
+  margin-top: 2rem;
+}

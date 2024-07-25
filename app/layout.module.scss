@@ -1,0 +1,50 @@
+.nav {
+  width: 100vw;
+  height: 4rem;
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem; // Adjust spacing as needed
+}
+
+.navLinks > a,
+.navLinks > button {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0.25rem;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.userLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem; // Adjust spacing as needed
+}
+
+.userLinks > a {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0.25rem;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}

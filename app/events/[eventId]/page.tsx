@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getEventInsecure } from '../../../database/events';
+import styles from './event.module.scss';
 
 type Props = {
   params: {
@@ -31,31 +32,36 @@ export default async function EventPage(props: Props) {
   }
 
   return (
-    <div>
-      <h1>{singleEvent.name}</h1>
-
-      <div>
+    <div className={styles.container}>
+      <h1 className={styles.eventName}>{singleEvent.name}</h1>
+      <div className={styles.eventCard}>
         <img src={singleEvent.image} alt={singleEvent.name} />
-        <br />
-        {singleEvent.type}
-        <br />
-        {singleEvent.category}
-        <br />
-        {singleEvent.date.toLocaleDateString()}
-        <br />
-        {formatDuration(singleEvent.duration)}
-        <br />
-        {singleEvent.location}
-        <br />
-        {singleEvent.description}
-        <br />
-        {singleEvent.organizerUrl}
-        <br />
-        <p>€{singleEvent.entryFee}</p>
-        <br />
+        <div className={styles.eventDetails}>
+          <div className={styles.eventType}>{singleEvent.type}</div>
+          <div className={styles.eventCategory}>{singleEvent.category}</div>
+          <div className={styles.eventDate}>
+            {singleEvent.date.toLocaleDateString()}
+          </div>
+          <div className={styles.eventDuration}>
+            {formatDuration(singleEvent.duration)}
+          </div>
+          <div className={styles.eventLocation}>{singleEvent.location}</div>
+          <div className={styles.eventDescription}>
+            {singleEvent.description}
+          </div>
+          <div className={styles.eventOrganizerUrl}>
+            <a
+              href={singleEvent.organizerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {singleEvent.organizerUrl}
+            </a>
+          </div>
+          <div className={styles.eventEntryFee}>€{singleEvent.entryFee}</div>
+        </div>
       </div>
-      <div>
-        <br />
+      <div className={styles.backLink}>
         <Link href="/events">Back to Upcoming Events</Link>
       </div>
     </div>
