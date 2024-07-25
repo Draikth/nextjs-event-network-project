@@ -69,23 +69,6 @@ export const getEvent = cache(async (sessionToken: string, eventId: number) => {
   return event;
 });
 
-export const deleteEvent = cache(
-  async (sessionToken: string, eventId: number) => {
-    const [event] = await sql<SiteEvent[]>`
-      DELETE FROM events USING sessions
-      WHERE
-        events.user_id = sessions.user_id
-        AND events.id = ${eventId}
-        AND sessions.token = ${sessionToken}
-        AND sessions.expiry_timestamp > now()
-      RETURNING
-        events.*
-    `;
-
-    return event;
-  },
-);
-
 export const getEventsInsecure = cache(async () => {
   const events = await sql<SiteEvent[]>`
     SELECT
