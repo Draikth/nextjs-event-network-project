@@ -31,8 +31,8 @@ export const eventSchema = z.object({
   entryFee: z.number(),
   category: z.string(),
   description: z.string(),
-  organizerUrl: z.string().url(),
-  image: z.string().url(),
+  organizerUrl: z.string(),
+  image: z.string(),
   ageRestriction: z.boolean(),
   archived: z.boolean(),
 });

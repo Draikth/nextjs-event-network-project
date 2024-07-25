@@ -15,7 +15,7 @@ export default function DeleteProfileForm({
   const handleDelete = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const response = await fetch('/api/postedEvents/deleteEvent', {
+    const response = await fetch('/api/user/delete', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

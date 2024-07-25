@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 import { PostEventsResponseBodyPost } from '../api/postedEvents/route';
@@ -29,12 +28,6 @@ export default function PostEventForm(props: Props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const router = useRouter();
-
-  function addImageUrl(url: string) {
-    setPostEvent({ ...postEvent, image: url });
-  }
-
-  console.log(addImageUrl);
 
   async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -65,7 +58,7 @@ export default function PostEventForm(props: Props) {
       return;
     }
 
-    router.push('/');
+    router.push('/events');
   }
 
   function handleChange(
@@ -95,13 +88,8 @@ export default function PostEventForm(props: Props) {
       <br />
       <form onSubmit={handleCreate}>
         <div>
-          <div>
-            <h3>Upload Image</h3>
-          </div>
-          <Link href="/imageUpload">Poster for Event</Link>
-
-          {/* <label htmlFor="image">Upload Image: </label>
-          <input
+          <label htmlFor="image">Upload Image: </label>
+          {/* <input
             id="image"
             name="image"
             value={postEvent.image}
