@@ -88,7 +88,7 @@ export default function PostEventForm(props: Props) {
       <br />
       <form onSubmit={handleCreate}>
         <div>
-          <label htmlFor="image">Upload Image: </label>
+          {/* <label htmlFor="image">Upload Image: </label> */}
           {/* <input
             id="image"
             name="image"
