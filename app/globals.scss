@@ -1,5 +1,5 @@
 :root {
-  --color-background: #fdf7e4;
+  --color-background: #e4fdf9;
   --color-layout: #ded0b6;
   --color-primary: #ff6f61; // New vibrant color
   --color-secondary: #3b5998; // Another vibrant color
@@ -30,22 +30,22 @@ body {
   background: var(--color-background);
   color: var(--color-text);
   padding: 1rem;
-  padding-bottom: 50px; // Keep the padding-bottom for the footer
+  padding: 0.5rem 1rem 50px 1rem; // Keep the padding-bottom for the footer
 
   @media (min-width: 768px) {
-    padding: 2rem;
+    padding: 0.5rem 2rem 50px 2rem;
   }
 
   @media (min-width: 1024px) {
-    padding: 3rem;
+    padding: 0.5rem 3rem 50px 3rem;
   }
 }
 
 main {
-  padding: 1rem;
+  padding: 1rem 0;
 
   @media (min-width: 768px) {
-    padding: 2rem;
+    padding: 2rem 0;
   }
 }
 

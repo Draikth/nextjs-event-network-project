@@ -85,7 +85,7 @@ export default function PostEventForm(props: Props) {
         <h2>Event Details</h2>
         <p>* stands for required fields</p>
       </div>
-      <form onSubmit={handleCreate}>
+      <form onSubmit={handleCreate} className={styles.form}>
         <div className={styles.formGroup}>
           <label className={styles.label}>
             *Event Name:
