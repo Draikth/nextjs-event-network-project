@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -46,36 +47,49 @@ export default function LoginForm(props: Props) {
   }
 
   return (
-    <form onSubmit={async (event) => await handleLogin(event)}>
-      <label>
-        Email
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button>Login</button>
-      <br />
+    <>
       <div>
-        If you haven't yet, please{' '}
-        <span>
-          <Link href="/register">Register here</Link>
-        </span>
+        <h2>Log in to your profile with your Registered Email and Password.</h2>
       </div>
-
-      {errors.map((error) => (
-        <div className="error" key={`error-${error.message}`}>
-          <ErrorMessage>{error.message}</ErrorMessage>
+      <form onSubmit={async (event) => await handleLogin(event)}>
+        <label>
+          Email
+          <input
+            value={email}
+            onChange={(event) => setEmail(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.currentTarget.value)}
+          />
+        </label>
+        <button>Login</button>
+        <br />
+        <div>
+          If you haven't yet, please Register here:
+          <br />
+          <div>
+            <Link href="/register">
+              <Image
+                src="/images/registration.webp"
+                alt="Outdoor event with crowd"
+                width={120}
+                height={100}
+              />
+            </Link>
+          </div>
         </div>
-      ))}
-    </form>
+
+        {errors.map((error) => (
+          <div className="error" key={`error-${error.message}`}>
+            <ErrorMessage>{error.message}</ErrorMessage>
+          </div>
+        ))}
+      </form>
+    </>
   );
 }

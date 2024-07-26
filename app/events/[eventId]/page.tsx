@@ -35,7 +35,7 @@ export default async function EventPage(props: Props) {
     <div className={styles.container}>
       <h1 className={styles.eventName}>{singleEvent.name}</h1>
       <div className={styles.eventCard}>
-        <img src={singleEvent.image} alt={singleEvent.name} />
+        {/* <img src={singleEvent.image} alt={singleEvent.name} /> */}
         <div className={styles.eventDetails}>
           <div className={styles.eventType}>{singleEvent.type}</div>
           <div className={styles.eventCategory}>{singleEvent.category}</div>

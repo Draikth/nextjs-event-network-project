@@ -20,7 +20,7 @@ export default async function EventsPage() {
             passHref
           >
             <div className={styles.eventCard}>
-              <img src={event.image} alt={event.name} />
+              {/* <img src={event.image} alt={event.name} /> */}
               <div className={styles.eventDetails}>
                 <div className={styles.eventName}>{event.name}</div>
                 <div className={styles.eventType}>{event.type}</div>

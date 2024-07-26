@@ -42,36 +42,43 @@ export default function RegisterForm() {
   }
 
   return (
-    <form onSubmit={async (event) => await handleRegister(event)}>
-      <label>
-        Username
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        Email
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button>Register</button>
+    <>
+      <div>
+        <h2>
+          Please Register with us using a Username, an Email and a Password
+        </h2>
+      </div>
+      <form onSubmit={async (event) => await handleRegister(event)}>
+        <label>
+          Username
+          <input
+            value={username}
+            onChange={(event) => setUsername(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          Email
+          <input
+            value={email}
+            onChange={(event) => setEmail(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.currentTarget.value)}
+          />
+        </label>
+        <button>Register</button>
 
-      {errors.map((error) => (
-        <div className="error" key={`error-${error.message}`}>
-          <ErrorMessage>{error.message}</ErrorMessage>
-        </div>
-      ))}
-    </form>
+        {errors.map((error) => (
+          <div className="error" key={`error-${error.message}`}>
+            <ErrorMessage>{error.message}</ErrorMessage>
+          </div>
+        ))}
+      </form>
+    </>
   );
 }
