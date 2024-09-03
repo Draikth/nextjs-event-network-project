@@ -24,6 +24,8 @@ export default function CommentsForm(props: Prop) {
     <>
       <h1>Notes for {props.user.username}</h1>
 
+      <div>{props.event.name}</div>
+
       <div>
         <div>
           {props.comments.length === 0 ? (
